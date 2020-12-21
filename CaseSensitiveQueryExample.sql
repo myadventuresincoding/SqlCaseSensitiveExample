@@ -20,7 +20,6 @@ ALTER TABLE [dbo].[CaseSensitiveExample] ADD  CONSTRAINT [UC_CaseSensitiveExampl
 ) ON [PRIMARY]
 GO
 
-
 -- Insert a client into the table
 INSERT INTO dbo.CaseSensitiveExample (ClientId, [Name])
 VALUES('clientid', 'First Client')
@@ -29,17 +28,18 @@ GO
 -- Show the client that has been added
 SELECT * FROM  dbo.CaseSensitiveExample
 
-
 -- Now let's insert another client, with a clientId that has different casing
 INSERT INTO dbo.CaseSensitiveExample (ClientId, [Name])
 VALUES('CLIENTID', 'Second Client')
 GO
 
--- Notice how, even though the ClientId is different, we get the following exception
---Violation of UNIQUE KEY constraint 'UC_CaseSensitiveExample_ClientId'. Cannot insert duplicate key in object 'dbo.CaseSensitiveExample'. The duplicate key value is (CLIENTID).
+-- Notice how, even though the ClientId is different, we get the following exception:
+-- Violation of UNIQUE KEY constraint 'UC_CaseSensitiveExample_ClientId'. 
+-- Cannot insert duplicate key in object 'dbo.CaseSensitiveExample'. 
+-- The duplicate key value is (CLIENTID).
 
--- The reason is because SQL Server columns by default are case insensitive, so the value clientid and CLIENTID are duplicates as far as SQL Server is concerned
-
+-- The reason is because SQL Server columns by default are case insensitive, 
+-- so the value clientid and CLIENTID are duplicates as far as SQL Server is concerned.
 
 -- Now let's update the clientId column to be case sensitive
 
@@ -64,10 +64,8 @@ INSERT INTO dbo.CaseSensitiveExample (ClientId, [Name])
 VALUES('CLIENTID', 'Second Client')
 GO
 
-
 -- Now both the first and second client have been successfully added
 SELECT * FROM  dbo.CaseSensitiveExample
-
 
 -- Cleanup
 DROP TABLE [dbo].[CaseSensitiveExample]
